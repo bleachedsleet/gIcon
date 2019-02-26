@@ -19,8 +19,14 @@ if %errorLevel% == 0 (
 exit /B
 
 :main
+set argc=0
+for %%x in (%*) do Set /A argc+=1
 set parameters=%1
 set loc=%2
+if %argc% GEQ 3 (
+	echo Invalid parameters 
+	goto help
+)
 if not defined parameters (
 	goto help
 )
@@ -33,14 +39,15 @@ if "%parameters%" == "-i" (
 		exit /B
 	)
 )
-exit /B
+echo Invalid argument
+goto help
 
 :help
 echo.
-echo Use -i to install icon 
-echo Use -r to remove icon 
+echo  -i [CUSTOM_PATH]     install icon 
+echo  -r                   remove icon 
 echo.
-echo Set install path as second argument. Leave blank for default location.
+echo Custom path should be quote wrapped. Leave blank for default Google Drive location.
 echo.
 exit /B
 
@@ -53,6 +60,7 @@ if not defined loc (
 		set loc=!loc:~0,-2!"
 	)
 )
+exit /B
 reg add HKCU\Software\Classes\CLSID\{9499128F-5BF8-4F88-989C-B5FE5F058E79} /ve /t REG_SZ /d "Google Drive" /f
 reg add HKCU\Software\Classes\CLSID\{9499128F-5BF8-4F88-989C-B5FE5F058E79}\DefaultIcon /ve /t REG_EXPAND_SZ /d "C:\Program Files\Google\Drive\googledrivesync.exe,0" /f
 reg add HKCU\Software\Classes\CLSID\{9499128F-5BF8-4F88-989C-B5FE5F058E79} /v System.IsPinnedToNameSpaceTree /t REG_DWORD /d 0x1 /f
