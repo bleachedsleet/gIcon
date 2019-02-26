@@ -48,7 +48,11 @@ exit /B
 if not defined loc (
 	echo Custom location not set...using default path
 	set loc="%userprofile%\Google Drive"
-) 
+) else (
+	if "!loc:~-2,-1!" == "\" (
+		set loc=!loc:~0,-2!"
+	)
+)
 reg add HKCU\Software\Classes\CLSID\{9499128F-5BF8-4F88-989C-B5FE5F058E79} /ve /t REG_SZ /d "Google Drive" /f
 reg add HKCU\Software\Classes\CLSID\{9499128F-5BF8-4F88-989C-B5FE5F058E79}\DefaultIcon /ve /t REG_EXPAND_SZ /d "C:\Program Files\Google\Drive\googledrivesync.exe,0" /f
 reg add HKCU\Software\Classes\CLSID\{9499128F-5BF8-4F88-989C-B5FE5F058E79} /v System.IsPinnedToNameSpaceTree /t REG_DWORD /d 0x1 /f
