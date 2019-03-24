@@ -8,17 +8,17 @@
 
 
 @echo off
-setlocal EnableExtensions EnableDelayedExpansion
 net session >nul 2>&1
 if %errorLevel% == 0 (
 	goto main
 ) else (
-    echo Run this script as Admin and try again
-    exit /B
+    echo This script must be run as Administrator
+	exit /B
 )
 exit /B
 
 :main
+setlocal EnableExtensions EnableDelayedExpansion
 set argc=0
 for %%x in (%*) do Set /A argc+=1
 set parameters=%1
@@ -29,6 +29,12 @@ if %argc% GEQ 3 (
 )
 if not defined parameters (
 	goto help
+)
+if not exist "C:\Program Files\Google\Drive\googledrivesync.exe" (
+	echo Google Drive is not installed or it could not be located
+	echo.
+	echo NOTE: Only the default install location for Backup and Sync is supported
+	exit /B
 )
 if "%parameters%" == "-i" (
 	call :importKeys
