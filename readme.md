@@ -3,6 +3,8 @@ This is a simple little script for Windows that adds ever so slightly deeper int
 
 This not only looks pretty, but it also has the added benefit of browsing directory trees directly from the sidebar. 
 
+![Example Image](https://raw.githubusercontent.com/scratchfive/gIcon/master/resources/demo.jpg)
+
 ## Usage
 Run without parameters for help. This script has full support for custom Google Drive paths but will default to the same default path that Google uses which is in your USERPROFILE folder. 
 
