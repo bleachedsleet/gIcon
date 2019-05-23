@@ -9,7 +9,21 @@ This not only looks pretty, but it also has the added benefit of browsing direct
 Run without parameters for help. This script has full support for custom Google Drive paths but will default to the same default path that Google uses which is in your USERPROFILE folder. 
 
 ```
-gicon.bat [-i | -r] "CUSTOM_PATH"
+gicon.bat [-r | -i] [g^|t^|e] [CUSTOM_PATH] [SERVICE_ID]
 ```
 
 This script is non invasive and works by making a few registry modifications. The icon used is the default Backup & Sync icon included in Google's client. This allows the icon to remain dynamically attached to sync status so you can get a quick overview of if your Drive is in sync or not. Everything the script does can be reversed safely.
+
+Currently, Google Drive ("g"), Tresorit ("t") and ExpanDrive ("e") are fully supported services. ExpanDrive requires a service ID to be declared, which is the name you'd like to display in the File Explorer sidebar. This is because ExpanDrive can itself support multiple services so gIcon can't safely assume the name of the service you are adding. 
+
+## A note on adding services
+Although any service can now be added, the current implementation requires adding code to the source directly which is far from ideal. This will be changed in the next update to allow an easier and safer way of making service changes, but until then, this feature will remain officially unsupported and undocumented. 
+
+## Known Issues
+- Tresorit version bumps will break this script. I aim to fix this in the next release
+- Currently, there is no way to remove individual service icons. It's all or nothing. This will be fixed soon.
+- The providers database will not update on removal. This isn't horrible, but could lead to filesize swelling if used often.
+
+## Looking Ahead
+- Service ID detection for ExpanDrive. This can be accomplished by parsing volume names on mounts and should be included in the next release. This is being tracked in [an issue](https://github.com/scratchfive/gIcon/issues/1#issue-447819092)
+- Remove database reliance. Services can be parsed directly from the registry keys. This eliminates the need for an additional file, increases portability and allows for targeted removal of individual services. I'm testing this in an internal build, but direct registry access through BATCH has a performance cost that is difficult to work around. The current method is much faster. 
