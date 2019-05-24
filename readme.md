@@ -9,7 +9,14 @@ This not only looks pretty, but it also has the added benefit of browsing direct
 Run without parameters for help. This script has full support for custom Google Drive paths but will default to the same default path that Google uses which is in your USERPROFILE folder. 
 
 ```
-gicon.bat [-r | -i] [g^|t^|e] [CUSTOM_PATH] [SERVICE_ID]
+gicon.bat [-r | -i] [ g | t | e ] [CUSTOM_PATH] [SERVICE_ID]
+
+-r ........................ Remove icon
+-i ........................ Install icon and select service. Possible services include "g" for Google Drive, "t" for Tresorit Drive and "e" for ExpanDrive
+
+[CUSTOM_PATH] is an optional parameter for defining a custom location for the sync or mount point of the service
+
+[SERVICE_ID] is an optional parameter for defining the name you wish to display in the sidebar. This is required for ExpanDrive and is currently ignored for all other services, though this may change in the future. 
 ```
 
 This script is non invasive and works by making a few registry modifications. The icon used is the default Backup & Sync icon included in Google's client. This allows the icon to remain dynamically attached to sync status so you can get a quick overview of if your Drive is in sync or not. Everything the script does can be reversed safely.
@@ -20,7 +27,7 @@ Currently, Google Drive ("g"), Tresorit ("t") and ExpanDrive ("e") are fully sup
 Although any service can now be added, the current implementation requires adding code to the source directly which is far from ideal. This will be changed in the next update to allow an easier and safer way of making service changes, but until then, this feature will remain officially unsupported and undocumented. 
 
 ## Known Issues
-- Tresorit version bumps will break this script. I aim to fix this in the next release
+- Tresorit version bumps will break this script. I aim to fix this in the next release (the current version 0.8x is supported; all previous and future point releases will break this script).
 - Currently, there is no way to remove individual service icons. It's all or nothing. This will be fixed soon.
 - The providers database will not update on removal. This isn't horrible, but could lead to filesize swelling if used often.
 

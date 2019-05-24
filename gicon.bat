@@ -65,15 +65,12 @@ if "%service%" == "e" (
 		goto help
 	)
 	set service_id=%id%
-) else (
-	echo ERROR: Service incorrectly defined
-	goto help
-)
+) 
 ::=========================
 ::ADD OTHER SERVICES HERE
 ::=========================
 
-::Perform login on passed arguments to determine program control flow and call functions accordingly
+::Perform logic on passed arguments to determine program control flow and call functions accordingly
 if "%parameters%" == "-i" (
 	call :importKeys
 	endlocal
@@ -162,7 +159,7 @@ for /L %%n in (1,1,32) do (
 echo Saving GUID
 echo %xGUID%,%service_id% >> providers.txt
 
-::Merge registry keys and values into corresponding hives. Only the hive CLSID needs to be unique. The SZ CLSID is reusable. 
+::Merge registry keys and values into corresponding hives. Only the hive CLSID needs to be unique. The SZ (NUL) CLSID is reusable. 
 reg add HKCU\Software\Classes\CLSID\{%xGUID%} /ve /t REG_SZ /d "%service_id%" /f
 reg add HKCU\Software\Classes\CLSID\{%xGUID%}\DefaultIcon /ve /t REG_EXPAND_SZ /d "%service_path%,0" /f
 reg add HKCU\Software\Classes\CLSID\{%xGUID%} /v System.IsPinnedToNameSpaceTree /t REG_DWORD /d 0x1 /f
