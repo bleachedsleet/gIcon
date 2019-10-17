@@ -1,3 +1,5 @@
+### Active development on this project has [been moved to GitLab](https://gitlab.com/scratchfive/gIcon). This project will be archived once the migration is fully complete and will no longer be updated. This migration is made in protest of GitHub's [continuing support of ICE](https://www.theverge.com/2019/10/9/20906213/github-ice-microsoft-software-email-contract-immigration-nonprofit-donation). 
+
 # gIcon
 This is a simple little script for Windows that adds ever so slightly deeper integration with the Explorer shell. I got tired of Google ignoring basic conventions of storage providers on Windows by ignoring the File Explorer sidebar and instead using Quick Access pinning. This script changes all that by adding a Google Drive entry on the sidebar instead, just like OneDrive and Dropbox do. 
 
